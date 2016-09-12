@@ -44,6 +44,7 @@ public class BookAdapter extends ArrayAdapter<Book> {
         }
         viewHolder.tvAuthor.setText(book.getAuthor());
         viewHolder.tvAuthor.setText(book.getAuthor());
+        viewHolder.tvTitle.setText(book.getTitle());
         Picasso.with(getContext()).load(Uri.parse(book.getCoverUrl())).error(R.drawable.ic_nocover).into(viewHolder.ivCover);
         return convertView;
     }

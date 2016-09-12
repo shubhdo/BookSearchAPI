@@ -16,13 +16,14 @@ public class BookClient {
     {
         this.client=new AsyncHttpClient();
     }
-    private String getApiUrl(String relativeUrl ) {
+    private String getApiUrl(String relativeUrl )
+    {
         return API_BASE_URL+relativeUrl;
     }
     public void getBooks(final String query, JsonHttpResponseHandler handler) {
 
         try {
-            String url=getApiUrl("search.json?=p");
+            String url=getApiUrl("search.json?q=");
             client.get(url+URLEncoder.encode(query,"utf-8"),handler);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();

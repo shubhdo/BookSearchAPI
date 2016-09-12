@@ -48,7 +48,6 @@ private ListView listView;
             @Override
             public boolean onQueryTextSubmit(String query) {
                 // Fetch the data remotely
-                Toast.makeText(BookListActivity.this, "query submitted", Toast.LENGTH_SHORT).show();
                 fetchBooks(query);
                 // Reset SearchView
                 searchView.clearFocus();
@@ -75,11 +74,14 @@ private ListView listView;
 
         client=new BookClient();
         client.getBooks(query,new JsonHttpResponseHandler() {
+
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
+
                     progress.setVisibility(ProgressBar.GONE);
                 JSONArray docs=null;
-                if (response!=null) {
+
+                    if (response!=null) {
                     docs=response.getJSONArray("docs");
                     final ArrayList<Book> books=Book.fromJson(docs);
                     bookAdapter.clear();
