@@ -11,7 +11,7 @@
     <ProgressBar
         android:id="@+id/progress"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="5sp"
         style="?android:attr/progressBarStyleHorizontal"
         android:max="100"
         android:indeterminate="true"
@@ -20,9 +20,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/lvBook"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="95dp" />
+        android:layout_alignParentTop="true" />
 
 
 </RelativeLayout>

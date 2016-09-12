@@ -1,6 +1,7 @@
 package com.cetpainfotech.booksearch;
 import cz.msebera.android.httpclient.Header;
 
+import android.content.Intent;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -25,6 +27,7 @@ private ListView listView;
     private BookAdapter bookAdapter;
     private BookClient client;
     private ProgressBar progress;
+    public static final String BOOK_DETAIL_KEY="book";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,8 +37,18 @@ private ListView listView;
         ArrayList<Book> abooks=new ArrayList<>();
         bookAdapter=new BookAdapter(this,abooks);
    listView.setAdapter(bookAdapter);
-        Toast.makeText(this, "activity created", Toast.LENGTH_SHORT).show();
+        setupBookSelectedListener();
+    }
 
+    public void setupBookSelectedListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent=new Intent(BookListActivity.this,BookDetailActivity.class);
+                intent.putExtra(BOOK_DETAIL_KEY,bookAdapter.getItem(position));
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -78,7 +91,7 @@ private ListView listView;
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
 
-                    progress.setVisibility(ProgressBar.GONE);
+                    progress.setVisibility(View.GONE);
                 JSONArray docs=null;
 
                     if (response!=null) {
